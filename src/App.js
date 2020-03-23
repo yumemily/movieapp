@@ -7,8 +7,11 @@ import SideBar from './components/SideBar'
 import { Col, Row, Container, Button, Dropdown, DropdownButton } from 'react-bootstrap'
 import InputRange from 'react-input-range';
 import Pagination from "react-js-pagination";
+import ReactModal from 'react-modal';
+import YouTube from 'react-youtube';
 import "react-input-range/lib/css/index.css"
 // import './Sidebar.css'
+
 
 let apiKey = '35975dc7fe7b3fef35d42864fcca143c'
 let movieList = []
@@ -20,10 +23,11 @@ class App extends React.Component {
       isloading: true,
       movies: [], //concat to load more movies later
       pageNumber: 1,
-      hover: false,
+      modal: false,
       allMovies: [],
       search: '',
       category: '',
+      trailer: '',
       totalResult: 0,
       value: {
         min: 5,
@@ -99,7 +103,6 @@ class App extends React.Component {
 
   componentDidMount() {
     const { category } = this.state
-    console.log('hi')
     this.fetchMovies(category) //is this even working :(
   }
 
@@ -120,7 +123,19 @@ class App extends React.Component {
     let url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=${pageNumber}`
     let data = await fetch(url)
     let dataResult = await data.json();
-    this.setState({movies: dataResult.results})
+    this.setState({ movies: dataResult.results })
+  }
+
+  openModal = async (movieId) => {
+
+    let url = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US` //get movie id
+    let data = await fetch(url);
+    let resultData = await data.json();
+    console.log(resultData)
+    this.setState({ modal: true })
+    this.setState({ trailer: resultData.results[0].key })
+    console.log(resultData.results[0].key)
+    console.log(this.state.trailer)
   }
 
   //side bar options
@@ -181,20 +196,29 @@ class App extends React.Component {
                 </div>
               </Row>
               <h6 className='text-muted pl-3 text-white'>─ browse movies by popularity, rating and see what's playing now. </h6>
-              <MovieComponent movieList={movies} />
+              <MovieComponent movieList={movies} openModal={this.openModal} />
               <div>
-              <Pagination 
-                activePage={this.state.pageNumber}
-                itemsCountPerPage={20}
-                totalItemsCount={450}
-                pageRangeDisplayed={5}
-                itemClass="page-item"
-                linkClass="page-link"
-                onChange={this.handlePageChange.bind(this)}
-              />
+                <Pagination
+                  activePage={this.state.pageNumber}
+                  itemsCountPerPage={20}
+                  totalItemsCount={450}
+                  pageRangeDisplayed={5}
+                  itemClass="page-item"
+                  linkClass="page-link"
+                  onChange={this.handlePageChange.bind(this)}
+                />
               </div>
             </Col>
           </Row>
+          <ReactModal
+            isOpen={this.state.modal}
+            onRequestClose={() => this.setState({ modal: false })}>
+            <YouTube
+              video = {this.state.trailer} // <- is this not a string perhaps? :c
+              autoplay
+              className="video"
+            />
+          </ReactModal>
         </Container>
       </div>
     )

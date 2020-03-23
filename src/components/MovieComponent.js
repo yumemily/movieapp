@@ -30,7 +30,7 @@ export default function MovieComponent(props) {
                             </Badge>{' '}
                             <Card.Img style={imgStyle} className="shadow-lg" variant="top" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${movie.poster_path}`} />
                             <Card.Body>
-                                <Card.Title style={trailerBtnPosition} ><Button style={trailerBtnStyle}><i class="fa fa-play-circle-o" aria-hidden="true"></i> Play trailer</Button></Card.Title>
+                                <Card.Title style={trailerBtnPosition} ><Button onClick = {() => props.openModal(movie.id)} style={trailerBtnStyle}><i class="fa fa-play-circle-o" aria-hidden="true"></i> Play trailer</Button></Card.Title>
                                 <Card.Text style={movieTitle}>
                                     <div style={{fontWeight:'bold'}}>{movie.title}</div> 
                                     Released: {moment(movie.releaseDate).format('LL')}
