@@ -187,7 +187,7 @@ class App extends React.Component {
             </Col>
             <Col sm={10}>
               <Row>
-                <h3 className="text-white  pt-5" style={{ paddingLeft: 35 }}> Discover movies</h3>
+                <h3 className="text-white  pt-5" style={{ paddingLeft: 16 }}> Discover movies</h3>
                 <div id="sortGroup" style={{ marginLeft: 'auto' }}>Sort by:
                 <DropdownButton className="sortButton" id="dropdown-basic-button" title="Sort By">
                     <Dropdown.Item onClick={this.sortByPopularity} href="#/action-1">Popularity</Dropdown.Item>
