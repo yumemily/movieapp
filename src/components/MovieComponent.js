@@ -4,10 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import moment from 'moment'
 
 export default function MovieComponent(props) {
-
+    let myCallback = (id) => {
+        props.openModal(id)}
     const { badgeGreen, badgeFront, badgeRed, imgStyle, rowStyle, movieTitle, trailerBtnPosition, trailerBtnStyle } = styles
     let htmlMovie = props.movieList.map((movie) => {
-
+    
         return (
 
             <div class="flip-container" onTouchStart="this.classList.toggle('hover');">
@@ -30,7 +31,7 @@ export default function MovieComponent(props) {
                             </Badge>{' '}
                             <Card.Img style={imgStyle} className="shadow-lg" variant="top" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${movie.poster_path}`} />
                             <Card.Body>
-                                <Card.Title style={trailerBtnPosition} ><Button onClick = {() => props.openModal(movie.id)} style={trailerBtnStyle}><i class="fa fa-play-circle-o" aria-hidden="true"></i> Play trailer</Button></Card.Title>
+                                <Card.Title style={trailerBtnPosition} ><Button onClick = {() => myCallback(movie.id)} style={trailerBtnStyle}><i class="fa fa-play-circle-o" aria-hidden="true"></i> Play trailer</Button></Card.Title>
                                 <Card.Text style={movieTitle}>
                                     <div style={{fontWeight:'bold'}}>{movie.title}</div> 
                                     Released: {moment(movie.releaseDate).format('LL')}

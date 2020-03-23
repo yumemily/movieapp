@@ -8,7 +8,7 @@ import { Col, Row, Container, Button, Dropdown, DropdownButton } from 'react-boo
 import InputRange from 'react-input-range';
 import Pagination from "react-js-pagination";
 import ReactModal from 'react-modal';
-import YouTube from 'react-youtube';
+import YouTube from '@u-wave/react-youtube';
 import "react-input-range/lib/css/index.css"
 // import './Sidebar.css'
 
@@ -215,9 +215,10 @@ class App extends React.Component {
             style={{ overlay: {display:"flex",justifyContent:"center"}, content: {width:"70%",height:"70%", position:"relative"} }}
             onRequestClose={() => this.setState({ modal: false })}>
             <YouTube
-              video = {this.state.trailer} // <- is this not a string perhaps? :c
+              video = {this.state.trailer} 
               autoplay
               className="video"
+              style={{ overlay: {display:"flex",justifyContent:"center"}, content: {width:"70%",height:"70%", position:"relative"} }}
             />
           </ReactModal>
         </Container>
