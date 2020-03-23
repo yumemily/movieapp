@@ -197,7 +197,7 @@ class App extends React.Component {
               </Row>
               <h6 className='text-muted pl-3 text-white'>─ browse movies by popularity, rating and see what's playing now. </h6>
               <MovieComponent movieList={movies} openModal={this.openModal} />
-              <div>
+              <div className='paginationRow'>
                 <Pagination
                   activePage={this.state.pageNumber}
                   itemsCountPerPage={20}
@@ -212,6 +212,7 @@ class App extends React.Component {
           </Row>
           <ReactModal
             isOpen={this.state.modal}
+            style={{ overlay: {display:"flex",justifyContent:"center"}, content: {width:"70%",height:"70%", position:"relative"} }}
             onRequestClose={() => this.setState({ modal: false })}>
             <YouTube
               video = {this.state.trailer} // <- is this not a string perhaps? :c
