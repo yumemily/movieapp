@@ -1,0 +1,205 @@
+*{
+  font-family: Montserrat;
+}
+
+h6{
+  font-family: Roboto;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #212529;
+ }
+ 
+ body, input, textarea, button{
+  font-family: 'Roboto', sans-serif;
+ }
+ 
+ .card-text, .card-title, .form-control::-webkit-input-placeholder{
+  color: white !important;
+ }
+ #cards, .row, .card  .card-body, .col-md-4{
+  background-color: #212529;
+  border-style: none;
+ }
+ 
+.navbar-brand{
+  margin-left: 25px;
+  font-size: .95rem !important;;
+  font-family: Montserrat;
+  font-weight: bold;
+}
+
+.navbar{
+  background-color: #FC4D55;
+}
+
+
+.row{
+  margin:0px auto;
+}
+
+
+.badge {
+  color: white;
+  background-color: #FEB209;
+  font-size: 90%;
+  align-self:center;
+  position: absolute;
+  height: 20px;
+  justify-content:center;
+  width: 50%;
+  align-content: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  -webkit-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.4);;
+  
+}
+
+.fa-user-circle-o:before{
+  color: white;
+  font-size: 40px;
+  margin-right: 30px;
+}
+
+.fa-signal:before {
+  font-size: 25px;
+}
+
+.fa-search:before {
+  font-size: 20px;
+}
+
+
+/* entire container, keeps perspective */
+.flip-container {
+  perspective: 1000px;
+  margin-bottom:55px;
+}
+	/* flip the pane when hovered */
+	.flip-container:hover .flipper, .flip-container.hover .flipper {
+		transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	width: 250.33px;
+	height: 380.98px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+}
+
+.form-control::-webkit-input-placeholder {
+  color: white !important;
+}
+
+.list-group{
+  margin-top: 20px;
+}
+
+.btn, h3{
+  font-weight: bold !important;
+}
+
+.card-title > .btn:hover{
+  background-color: #FD7179 !important;
+}
+
+.list-group-item > .btn:hover, .fa-fire:before, .fa-star:before, .fa-ticket:before {
+  color:#FC4D55 !important;
+}
+
+#avi{
+  width:40px;
+  margin-right: 16px;
+}
+
+#dropdown-basic-button{
+  background-color: #212529;
+  border-style: none;
+  margin-right: 70px;
+}
+
+.input-range {
+  margin-top: 1rem;
+}
+.input-range__track--active,
+.input-range__slider {
+    background:#FC4D55 !important;
+    border-color: #FC4D55 !important;
+} 
+
+.filterform{
+    margin: 0 auto;
+    padding: 10px 30px 0;
+  
+    @media (min-width: 200px) {
+      max-width: 60%;
+    }
+  }
+
+.pagination {
+  margin-left: 16px;
+  margin-bottom: 30px;
+}
+.pagination > li > a
+{
+    background-color: #FC4D55;
+    color: white;
+    border-style: none;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: white;
+    background-color: #FD7179;
+    border-style: none;
+}
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: #FD7179 !Important;
+    border-style: none;
+}
+
+.pagination > .active > a:hover
+{
+    background-color: #FD7179 !Important;
+    border-style: none;
+}
+
+.pagination > .disabled {
+  color: white;
+  background-color: blue;
+}
