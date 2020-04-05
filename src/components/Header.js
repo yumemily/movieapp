@@ -2,6 +2,9 @@ import React from 'react'
 import { Nav, Form, Button, Navbar, FormControl } from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
 
+const searchButton = { position: 'absolute', right: 1010, backgroundColor: '#FC4D55', borderStyle: 'none', color: 'white' }
+const searchInput = { position: 'absolute', right: 800, backgroundColor: '#FC4D55', borderStyle: 'none', color: 'white' }
+
 export default class Header extends React.Component {
     constructor(props) {
         super(props)
@@ -32,8 +35,6 @@ export default class Header extends React.Component {
                             <FormControl value={this.state.search}
                                 onChange={e => this.filterSearch(e)} style={searchInput} type="text" placeholder="Search movies..." className="mr-sm-2"
                             />
-
-                            {/* <i class="fa fa-user-circle-o" aria-hidden="true"></i> */}
                             <img id="avi" src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxZpVygiyGOUMdjX72aoyMBbTqh6h1e4gY7Uq-Kk7xrY6bUFAf' alt='' />
                             <i style={{ color: 'white' }} class="fa fa-caret-down" aria-hidden="true"></i>
                         </Form>
@@ -43,6 +44,3 @@ export default class Header extends React.Component {
         )
     }
 }
-
-const searchButton = { position: 'absolute', right: 1010, backgroundColor: '#FC4D55', borderStyle: 'none', color: 'white' }
-const searchInput = { position: 'absolute', right: 800, backgroundColor: '#FC4D55', borderStyle: 'none', color: 'white' }

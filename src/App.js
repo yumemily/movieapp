@@ -1,20 +1,20 @@
 import React from 'react';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
+import { Col, Row, Container, Dropdown, DropdownButton } from 'react-bootstrap'
+
 import MovieComponent from './components/MovieComponent'
 import Header from './components/Header'
 import SideBar from './components/SideBar'
-import { Col, Row, Container, Button, Dropdown, DropdownButton } from 'react-bootstrap'
+
 import InputRange from 'react-input-range';
 import Pagination from "react-js-pagination";
 import ReactModal from 'react-modal';
 import YouTube from '@u-wave/react-youtube';
+
 import "react-input-range/lib/css/index.css"
-// import './Sidebar.css'
 
-
-let apiKey = '35975dc7fe7b3fef35d42864fcca143c'
-let movieList = []
+const apiKey = '35975dc7fe7b3fef35d42864fcca143c'
 
 class App extends React.Component {
   constructor() {
@@ -26,7 +26,7 @@ class App extends React.Component {
       modal: false,
       allMovies: [],
       search: '',
-      category: '',
+      category: 'popular',
       trailer: '',
       totalResult: 0,
       value: {
@@ -36,32 +36,16 @@ class App extends React.Component {
     }
   }
 
-
   fetchMovies = async () => {
     const { pageNumber } = this.state
-    const links = {
-      'top-rated': `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=${pageNumber}`,
-      'popular': `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNumber}`,
-      'nowplaying': `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${pageNumber}`
-    };
 
-    let url = ''
+    //display popular movies by default
+    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNumber}`
 
-    if (this.state.category === '' || this.state.category === 'popular') {
-      url = links.popular //show popular movies by default
-    } else {
-      url = links[this.state.category]
-    }
-
-    console.log(url)
-    console.log(apiKey)
     const response = await fetch(url)
     const data = await response.json();
     const movies = data.results;
     const newMovies = this.state.movies.concat(movies);
-
-    console.log(data.results)
-    console.log(pageNumber)
 
     this.setState({
       movies: newMovies,
@@ -69,7 +53,6 @@ class App extends React.Component {
       totalResult: this.state.totalResult
     });
   }
-
 
   sortByPopularity = () => {
     let { allMovies } = this.state;
@@ -103,12 +86,10 @@ class App extends React.Component {
 
   componentDidMount() {
     const { category } = this.state
-    this.fetchMovies(category) //is this even working :(
+    this.fetchMovies(category) 
   }
 
   filterByRating = (value) => {
-    console.log(value)
-    console.log(value.min)
     const { movies } = this.state
     this.setState({ value: value })
     let filterRating = movies.filter((movie) => movie.vote_average >= value.min && movie.vote_average <= value.max)
@@ -118,7 +99,6 @@ class App extends React.Component {
   }
 
   handlePageChange = async (pageNumber) => {
-    const { movies } = this.state
     this.setState({ pageNumber: pageNumber });
     let url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=${pageNumber}`
     let data = await fetch(url)
@@ -131,11 +111,8 @@ class App extends React.Component {
     let url = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US` //get movie id
     let data = await fetch(url);
     let resultData = await data.json();
-    console.log(resultData)
     this.setState({ modal: true })
     this.setState({ trailer: resultData.results[0].key })
-    console.log(resultData.results[0].key)
-    console.log(this.state.trailer)
   }
 
   //side bar options
@@ -149,7 +126,6 @@ class App extends React.Component {
       let data = await fetch(url);
       let result = await data.json()
       this.setState({ movies: result.results })
-      console.log("url", result);
     } else if (categoryName === 'popular') {
       let url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-USpage=${pageNumber}`
       let data = await fetch(url)
@@ -164,7 +140,6 @@ class App extends React.Component {
   }
 
   render() {
-
     const { movies } = this.state
     return (
       <div>
@@ -182,9 +157,10 @@ class App extends React.Component {
                   minValue={0}
                   value={this.state.value}
                   onChange={value => this.filterByRating(value)}
-                /></form>
-
+                />
+              </form>
             </Col>
+
             <Col sm={10}>
               <Row>
                 <h3 className="text-white  pt-5" style={{ paddingLeft: 16 }}> Discover movies</h3>
